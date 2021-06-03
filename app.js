@@ -268,8 +268,8 @@ app.get("/user/tweets/", authenticateToken, async (request, response) => {
 app.post("/user/tweets/", authenticateToken, async (request, response) => {
   let { tweet } = request.body;
   let { username } = request;
-  const user_id = await database.get(
-    `SELECT user_id FROM user WHERE username = '${request.username}'`
+  const { user_id } = await database.get(
+    `SELECT user_id FROM user WHERE username = '${username}'`
   );
 
   const postQuery = `INSERT INTO tweet (tweet,user_id)
